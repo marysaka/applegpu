@@ -41,11 +41,15 @@ compute shader:
  12e: 52154a421000         while_icmp       r0l, nueq, r5, u2l, 2
  134: 00c0f2feffff         jmp_exec_any     0x26
  13a: 521600000000         pop_exec         r0l, 2
- 140: 350a000500c01200     stack_load       r1, i32, x, 0, 0
- 148: 3800                 wait             0
- 14a: 72091004             get_sr           r2, sr80 (thread_position_in_grid.x)
- 14e: 3e850b242c00         convert          s32_to_f, r1, r1.discard, rte
- 154: 4509400e00c01200     device_store     0, i32, x, r1, u0_u1, r2, unsigned, 0
- 15c: 8800                 stop             
+ 140: f2091004             get_sr           r2.cache, sr80 (thread_position_in_grid.x)
+ 144: 8e15004024001000     iadd             r5.cache, 0, r2, lsl 2
+ 14c: 8e0dc20a01000000     isub             r3.cache, r1.discard, 16
+ 154: ce058a4200000000     iadd.sat         r1.cache, r5.cache, 4
+ 15c: 1205c2622cc6a04c     icmpsel          ugt, r1, r1.discard, r3.discard, r3.discard, r5.discard
+ 164: 350a200400c01200     stack_load       r1, i32, x, r1, 0
+ 16c: 3800                 wait             0
+ 16e: 3e850b242c00         convert          s32_to_f, r1, r1.discard, rte
+ 174: 4509400e00c01200     device_store     0, i32, x, r1, u0_u1, r2, unsigned, 0
+ 17c: 8800                 stop             
 
 

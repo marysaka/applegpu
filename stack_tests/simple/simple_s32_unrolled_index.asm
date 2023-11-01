@@ -1,6 +1,6 @@
 compute shader:
    0: 62291c000000         mov_imm          r10, 28, 0b0
-   6: b500c1052100         stack_store      i8, 1, 2, 0, 28, 0
+   6: b500c1052100         stack_adjust     28
    c: e2011c000000         mov_imm          r0.cache, 28, 0b0
   12: f2211004             get_sr           r8.cache, sr80 (thread_position_in_grid.x)
   16: 8e0100002c001000     iadd             r0.cache, 0, r0.discard, lsl 2
@@ -72,23 +72,23 @@ compute shader:
  1f2: 62053d000000         mov_imm          r1, 61, 0b0
  1f8: 62093e000000         mov_imm          r2, 62, 0b0
  1fe: 620d3f000000         mov_imm          r3, 63, 0b0
- 204: b5fa000500c1f200     stack_store      i32, 1, 0, xyzw, 4, r63_r64_r65_r66, 0, 0
- 20c: b5da000501c1f200     stack_store      i32, 1, 0, xyzw, 4, r59_r60_r61_r62, 16, 0
- 214: b5ba000502c1f200     stack_store      i32, 1, 0, xyzw, 4, r55_r56_r57_r58, 32, 0
- 21c: b59a000503c1f200     stack_store      i32, 1, 0, xyzw, 4, r51_r52_r53_r54, 48, 0
- 224: b57a000504c1f200     stack_store      i32, 1, 0, xyzw, 4, r47_r48_r49_r50, 64, 0
- 22c: b55a000505c1f200     stack_store      i32, 1, 0, xyzw, 4, r43_r44_r45_r46, 80, 0
- 234: b53a000506c1f200     stack_store      i32, 1, 0, xyzw, 4, r39_r40_r41_r42, 96, 0
- 23c: b51a000507c1f200     stack_store      i32, 1, 0, xyzw, 4, r35_r36_r37_r38, 112, 0
- 244: b5fa000508c0f200     stack_store      i32, 1, 0, xyzw, 4, r31_r32_r33_r34, 128, 0
- 24c: b5da000509c0f200     stack_store      i32, 1, 0, xyzw, 4, r27_r28_r29_r30, 144, 0
- 254: b5ba00050ac0f200     stack_store      i32, 1, 0, xyzw, 4, r23_r24_r25_r26, 160, 0
- 25c: b59a00050bc0f200     stack_store      i32, 1, 0, xyzw, 4, r19_r20_r21_r22, 176, 0
- 264: b57a00050cc0f200     stack_store      i32, 1, 0, xyzw, 4, r15_r16_r17_r18, 192, 0
- 26c: b55a00050dc0f200     stack_store      i32, 1, 0, xyzw, 4, r11_r12_r13_r14, 208, 0
- 274: b52200050ec0f200     stack_store      i32, 1, 0, xyzw, 4, r4_r5_r6_r7, 224, 0
- 27c: b50200050fc0f200     stack_store      i32, 1, 0, xyzw, 4, r0_r1_r2_r3, 240, 0
- 284: 3502200401c01200     stack_load       r0, i32, 1, 0, x, 4, r9, 0
+ 204: b5fa000500c1f200     stack_store      i32, xyzw, r63_r64_r65_r66, 0, 0
+ 20c: b5da000501c1f200     stack_store      i32, xyzw, r59_r60_r61_r62, 16, 0
+ 214: b5ba000502c1f200     stack_store      i32, xyzw, r55_r56_r57_r58, 32, 0
+ 21c: b59a000503c1f200     stack_store      i32, xyzw, r51_r52_r53_r54, 48, 0
+ 224: b57a000504c1f200     stack_store      i32, xyzw, r47_r48_r49_r50, 64, 0
+ 22c: b55a000505c1f200     stack_store      i32, xyzw, r43_r44_r45_r46, 80, 0
+ 234: b53a000506c1f200     stack_store      i32, xyzw, r39_r40_r41_r42, 96, 0
+ 23c: b51a000507c1f200     stack_store      i32, xyzw, r35_r36_r37_r38, 112, 0
+ 244: b5fa000508c0f200     stack_store      i32, xyzw, r31_r32_r33_r34, 128, 0
+ 24c: b5da000509c0f200     stack_store      i32, xyzw, r27_r28_r29_r30, 144, 0
+ 254: b5ba00050ac0f200     stack_store      i32, xyzw, r23_r24_r25_r26, 160, 0
+ 25c: b59a00050bc0f200     stack_store      i32, xyzw, r19_r20_r21_r22, 176, 0
+ 264: b57a00050cc0f200     stack_store      i32, xyzw, r15_r16_r17_r18, 192, 0
+ 26c: b55a00050dc0f200     stack_store      i32, xyzw, r11_r12_r13_r14, 208, 0
+ 274: b52200050ec0f200     stack_store      i32, xyzw, r4_r5_r6_r7, 224, 0
+ 27c: b50200050fc0f200     stack_store      i32, xyzw, r0_r1_r2_r3, 240, 0
+ 284: 3502200401c01200     stack_load       r0, i32, x, r9, 0
  28c: 3800                 wait             0
  28e: 3e810b042c00         convert          s32_to_f, r0, r0.discard, rte
  294: 4501000e01c01200     device_store     0, i32, x, r0, u0_u1, r8, unsigned, 0

@@ -5101,35 +5101,39 @@ class StackLoadStoreInstructionDesc(InstructionDesc):
 	def __init__(self, name, bit):
 		super().__init__(name, size=(6, 8), length_bit_pos=47)
 		self.add_constant(0, 8, (bit << 7) | 0b00110101)
-		#self.add_constant(16, 4, 0b0000)
-		#self.add_constant(24, 2, 0b01)
+		self.add_constant(16, 4, 0b0000)
 
 		reg = MemoryRegDesc('R')
-		#reg = StackReg32Desc('r', [
-		#	(10, 6, 'rl'),
-		#	(40, 1, 'rh'),
-		#])
 
-#		self.add_operand(ImmediateDesc('rh', 40, 1))
 		if not bit:
 			self.add_operand(reg)
 
 		self.add_operand(EnumDesc('F', [(8, 2, 'F'), (50, 2, 'Fx')], None, MEMORY_FORMATS))
-		self.add_operand(ImmediateDesc('i1', 26, 1))
-		self.add_operand(ImmediateDesc('i2', 36, 3))
+
+		# TODO: Seems always to be 1
+		# self.add_operand(ImmediateDesc('i1', 26, 1))
+		self.add_constant(26, 1, 0b1) # i1
+
+		# TODO: Seems always to be 0
+		# self.add_operand(ImmediateDesc('i2', 36, 3))
+		self.add_constant(36, 3, 0b0000) # i2
+
 		#self.add_operand(ImmediateDesc('i3', 49, 1))
 		#self.add_operand(ImmediateDesc('i4', 50, 2))
 
 		self.add_operand(EnumDesc('mask', 52, 4, MASK_DESCRIPTIONS))
 
 
-		self.add_operand(ImmediateDesc('i5', 44, 3))
+		# TODO: Seems always to be 4
+		# self.add_operand(ImmediateDesc('i5', 44, 3))
+		self.add_constant(44, 3, 0b0100) # i5
 
 		if bit:
 			self.add_operand(reg)
 
 		self.add_operand(MemoryIndexDesc('O'))
 
+		# sometime used by stack_load, wait group?
 		self.add_operand(ImmediateDesc('i6', 30, 1))
 
 @register
@@ -5168,16 +5172,31 @@ class StackGetPtrInstructionDesc(InstructionDesc):
 @register
 class StackAdjustInstructionDesc(InstructionDesc):
 	def __init__(self):
-		super().__init__('TODO.stack_adjust', size=(6, 8), length_bit_pos=47)
+		super().__init__('stack_adjust', size=(6, 8), length_bit_pos=47)
 		self.add_constant(0, 8, 0b10110101)
 		self.add_constant(16, 4, 0b0001)
 		self.add_constant(24, 2, 0b01)
 
-		self.add_operand(ImmediateDesc('i0', 8, 2))
-		self.add_operand(ImmediateDesc('i1', 26, 1))
-		self.add_operand(ImmediateDesc('i2', 36, 3))
-		self.add_operand(ImmediateDesc('i3', 44, 3))
-		self.add_operand(ImmediateDesc('i4', 50, 6))
+		# 0, 1, 2, 0, 0
+		# TODO: Seems always to be 0
+		# self.add_operand(ImmediateDesc('i0', 8, 2))
+		self.add_constant(8, 2, 0b00) # i0
+
+		# TODO: Seems always to be 1
+		# self.add_operand(ImmediateDesc('i1', 26, 1))
+		self.add_constant(26, 1, 0b1) # i1
+
+		# TODO: Seems always to be 2
+		# self.add_operand(ImmediateDesc('i2', 36, 3))
+		self.add_constant(36, 3, 0b010) # i2
+
+		# TODO: Seems always to be 0
+		# self.add_operand(ImmediateDesc('i3', 44, 3))
+		self.add_constant(44, 3, 0b000) # i3
+
+		# TODO: Seems always to be 0
+		# self.add_operand(ImmediateDesc('i4', 50, 6))
+		self.add_constant(50, 6, 0b000000) # i4
 
 		self.add_operand(StackAdjustmentDesc('v'))
 		#self.add_operand(MemoryIndexDesc('idx'))

@@ -1,6 +1,6 @@
 compute shader:
    0: 62294c000000         mov_imm          r10, 76, 0b0
-   6: b500c1052400         stack_store      i8, 1, 2, 0, 76, 0
+   6: b500c1052400         stack_adjust     76
    c: e2094c000000         mov_imm          r2.cache, 76, 0b0
   12: e20500000000         mov_imm          r1.cache, 0, 0b0
   18: 8e0900402c001000     iadd             r2.cache, 0, r2.discard, lsl 2
@@ -63,18 +63,18 @@ compute shader:
  1da: 0e201e2008000000     iadd             r8l, 30, r1l.cache
  1e2: 0e221f2008000000     iadd             r8h, 31, r1l.cache
  1ea: 0e0520202c000000     iadd             r1, 32, r1.discard
- 1f2: b528800403c0f000     stack_store      i8, 1, 0, xyzw, 4, r5l_r5h_r6l_r6h, r28, 0
- 1fa: b5b0600403c0f000     stack_store      i8, 1, 0, xyzw, 4, r22l_r22h_r23l_r23h, r27, 0
- 202: b598400403c0f000     stack_store      i8, 1, 0, xyzw, 4, r19l_r19h_r20l_r20h, r26, 0
- 20a: b588200403c0f000     stack_store      i8, 1, 0, xyzw, 4, r17l_r17h_r18l_r18h, r25, 0
- 212: b578000403c0f000     stack_store      i8, 1, 0, xyzw, 4, r15l_r15h_r16l_r16h, r24, 0
- 21a: b568a00402c0f000     stack_store      i8, 1, 0, xyzw, 4, r13l_r13h_r14l_r14h, r21, 0
- 222: b558200401c0f000     stack_store      i8, 1, 0, xyzw, 4, r11l_r11h_r12l_r12h, r9, 0
- 22a: b538600400c0f000     stack_store      i8, 1, 0, xyzw, 4, r7l_r7h_r8l_r8h, r3, 0
+ 1f2: b528800403c0f000     stack_store      i8, xyzw, r5l_r5h_r6l_r6h, r28, 0
+ 1fa: b5b0600403c0f000     stack_store      i8, xyzw, r22l_r22h_r23l_r23h, r27, 0
+ 202: b598400403c0f000     stack_store      i8, xyzw, r19l_r19h_r20l_r20h, r26, 0
+ 20a: b588200403c0f000     stack_store      i8, xyzw, r17l_r17h_r18l_r18h, r25, 0
+ 212: b578000403c0f000     stack_store      i8, xyzw, r15l_r15h_r16l_r16h, r24, 0
+ 21a: b568a00402c0f000     stack_store      i8, xyzw, r13l_r13h_r14l_r14h, r21, 0
+ 222: b558200401c0f000     stack_store      i8, xyzw, r11l_r11h_r12l_r12h, r9, 0
+ 22a: b538600400c0f000     stack_store      i8, xyzw, r7l_r7h_r8l_r8h, r3, 0
  232: 521542421000         while_icmp       r0l, nueq, r1, u2l, 2
  238: 00c0ecfdffff         jmp_exec_any     0x24
  23e: 521600000000         pop_exec         r0l, 2
- 244: 3504000500c01000     stack_load       r0h, i8, 1, 0, x, 4, 0, 0
+ 244: 3504000500c01000     stack_load       r0h, i8, x, 0, 0
  24c: 3800                 wait             0
  24e: 72091004             get_sr           r2, sr80 (thread_position_in_grid.x)
  252: 3e8501140c00         convert          s8_to_f, r1, r0h.discard, rte

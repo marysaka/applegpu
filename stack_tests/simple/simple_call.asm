@@ -1,12 +1,12 @@
 compute l__Z6helperPU9MTLdeviceKjj:
    0: 0e29084025000000     iadd             r10, 8, r10
    8: 62120000             mov_imm          r4h, 0
-   c: b50081052000         stack_store      i8, 1, 2, 0, 8, 0
-  12: b511000501c03000     stack_store      i16, 1, 0, xy, 4, r2l_r2h, 16, 0
-  1a: b5b9c00500c03000     stack_store      i16, 1, 0, xy, 4, r23l_r23h, 12, 0
-  22: b5c1800500c03000     stack_store      i16, 1, 0, xy, 4, r24l_r24h, 8, 0
-  2a: b5c9400500c03000     stack_store      i16, 1, 0, xy, 4, r25l_r25h, 4, 0
-  32: b5d1000500c03000     stack_store      i16, 1, 0, xy, 4, r26l_r26h, 0, 0
+   c: b50081052000         stack_adjust     8
+  12: b511000501c03000     stack_store      i16, xy, r2l_r2h, 16, 0
+  1a: b5b9c00500c03000     stack_store      i16, xy, r23l_r23h, 12, 0
+  22: b5c1800500c03000     stack_store      i16, xy, r24l_r24h, 8, 0
+  2a: b5c9400500c03000     stack_store      i16, xy, r25l_r25h, 4, 0
+  32: b5d1000500c03000     stack_store      i16, xy, r26l_r26h, 0, 0
   3a: 7e5d960a8000         mov              r23, r11.cache
   40: 7e61580a8000         mov              r24, r12
   46: 0519ae0621c01200     device_load      0, i32, x, r3, r23_r24, r13, unsigned
@@ -35,12 +35,12 @@ compute l__Z6helperPU9MTLdeviceKjj:
   d0: 520e00000000         pop_exec         r0l, 1
   d6: 0e2d462227000000     iadd             r11, r3, r25
   de: 7e05440a8000         mov              r1, r2
-  e4: 35d1000500c03000     stack_load       r26l_r26h, i16, 1, 0, xy, 4, 0, 0
-  ec: 35c9400500c03000     stack_load       r25l_r25h, i16, 1, 0, xy, 4, 4, 0
-  f4: 35c1800500c03000     stack_load       r24l_r24h, i16, 1, 0, xy, 4, 8, 0
-  fc: 35b9c00500c03000     stack_load       r23l_r23h, i16, 1, 0, xy, 4, 12, 0
- 104: 3511000501c03000     stack_load       r2l_r2h, i16, 1, 0, xy, 4, 16, 0
- 10c: b50081052f8000ff     stack_store      i8, 1, 2, 0, -8, 0
+  e4: 35d1000500c03000     stack_load       r26l_r26h, i16, xy, 0, 0
+  ec: 35c9400500c03000     stack_load       r25l_r25h, i16, xy, 4, 0
+  f4: 35c1800500c03000     stack_load       r24l_r24h, i16, xy, 8, 0
+  fc: 35b9c00500c03000     stack_load       r23l_r23h, i16, xy, 12, 0
+ 104: 3511000501c03000     stack_load       r2l_r2h, i16, xy, 16, 0
+ 10c: b50081052f8000ff     stack_adjust     -8
  114: 0e29548a00000000     isub             r10, r10, 8
  11c: 62120000             mov_imm          r4h, 0
  120: 3800                 wait             0
@@ -50,7 +50,7 @@ compute shader:
  180: 62000000             mov_imm          r0l, 0
  184: 622908000000         mov_imm          r10, 8, 0b0
  18a: 62020000             mov_imm          r0h, 0
- 18e: b50081052000         stack_store      i8, 1, 2, 0, 8, 0
+ 18e: b50081052000         stack_adjust     8
  194: 72091004             get_sr           r2, sr80 (thread_position_in_grid.x)
  198: 72351004             get_sr           r13, sr80 (thread_position_in_grid.x)
  19c: 7e2d84098000         mov              r11, u2
